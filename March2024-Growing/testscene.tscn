@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://djaex1bqq41kf"]
+[gd_scene load_steps=8 format=3 uid="uid://djaex1bqq41kf"]
 
 [ext_resource type="Script" uid="uid://br50dk8gxrvjm" path="res://scripts/BlobInputController.gd" id="1_44gc5"]
 [ext_resource type="PackedScene" uid="uid://lxq5o1pnblcb" path="res://prefabs/FreeBlob.tscn" id="1_612pj"]
 [ext_resource type="Texture2D" uid="uid://be07qiiv45u73" path="res://icon.svg" id="1_jotil"]
+[ext_resource type="Script" uid="uid://bo5e0k3mof3wd" path="res://JointLine.gd" id="4_asog6"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jotil"]
 
@@ -32,10 +33,57 @@ script = ExtResource("1_44gc5")
 
 [node name="Structure" type="Node2D" parent="."]
 
-[node name="PlacedBlobTest_2" type="RigidBody2D" parent="Structure"]
-position = Vector2(332, 573)
+[node name="PlacedBlobTest" type="RigidBody2D" parent="Structure"]
+position = Vector2(293, 333)
 collision_layer = 8
 collision_mask = 13
+lock_rotation = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Structure/PlacedBlobTest"]
+scale = Vector2(0.28125, 0.28125)
+texture = ExtResource("1_jotil")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structure/PlacedBlobTest"]
+shape = SubResource("CircleShape2D_jotil")
+
+[node name="Spring1" type="DampedSpringJoint2D" parent="Structure/PlacedBlobTest"]
+position = Vector2(0, 3)
+node_a = NodePath("..")
+node_b = NodePath("../../PlacedBlobTest_2")
+bias = 0.9
+disable_collision = false
+length = 200.0
+rest_length = 200.0
+stiffness = 40.0
+damping = 3.0
+
+[node name="Line2D" type="Line2D" parent="Structure/PlacedBlobTest/Spring1"]
+points = PackedVector2Array(0, 0, 0, 0)
+texture_mode = 2
+script = ExtResource("4_asog6")
+
+[node name="PlacedBlobTest_2" type="RigidBody2D" parent="Structure"]
+position = Vector2(293, 536)
+collision_layer = 8
+collision_mask = 13
+lock_rotation = true
+
+[node name="Spring1_2" type="DampedSpringJoint2D" parent="Structure/PlacedBlobTest_2"]
+position = Vector2(1, 0)
+rotation = 3.92699
+node_a = NodePath("..")
+node_b = NodePath("../../PlacedBlobTest_3")
+bias = 0.9
+disable_collision = false
+length = 200.0
+rest_length = 200.0
+stiffness = 40.0
+damping = 3.0
+
+[node name="Line2D" type="Line2D" parent="Structure/PlacedBlobTest_2/Spring1_2"]
+points = PackedVector2Array(0, 0, 0, 0)
+texture_mode = 2
+script = ExtResource("4_asog6")
 
 [node name="Sprite2D" type="Sprite2D" parent="Structure/PlacedBlobTest_2"]
 scale = Vector2(0.28125, 0.28125)
@@ -44,16 +92,33 @@ texture = ExtResource("1_jotil")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Structure/PlacedBlobTest_2"]
 shape = SubResource("CircleShape2D_jotil")
 
-[node name="PlacedBlobTest" type="RigidBody2D" parent="Structure"]
-position = Vector2(333, 372)
+[node name="PlacedBlobTest_3" type="RigidBody2D" parent="Structure"]
+position = Vector2(438, 394)
 collision_layer = 8
 collision_mask = 13
+lock_rotation = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Structure/PlacedBlobTest"]
+[node name="Spring1_2" type="DampedSpringJoint2D" parent="Structure/PlacedBlobTest_3"]
+rotation = 1.92859
+node_a = NodePath("..")
+node_b = NodePath("../../PlacedBlobTest")
+bias = 0.9
+disable_collision = false
+length = 150.0
+rest_length = 150.0
+stiffness = 40.0
+damping = 3.0
+
+[node name="Line2D" type="Line2D" parent="Structure/PlacedBlobTest_3/Spring1_2"]
+points = PackedVector2Array(0, 0, 0, 0)
+texture_mode = 2
+script = ExtResource("4_asog6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Structure/PlacedBlobTest_3"]
 scale = Vector2(0.28125, 0.28125)
 texture = ExtResource("1_jotil")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Structure/PlacedBlobTest"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structure/PlacedBlobTest_3"]
 shape = SubResource("CircleShape2D_jotil")
 
 [editable path="FreeBlob"]
