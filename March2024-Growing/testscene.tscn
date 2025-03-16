@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://djaex1bqq41kf"]
+[gd_scene load_steps=9 format=3 uid="uid://djaex1bqq41kf"]
 
 [ext_resource type="Script" uid="uid://br50dk8gxrvjm" path="res://scripts/BlobInputController.gd" id="1_44gc5"]
 [ext_resource type="PackedScene" uid="uid://lxq5o1pnblcb" path="res://prefabs/FreeBlob.tscn" id="1_612pj"]
 [ext_resource type="Texture2D" uid="uid://be07qiiv45u73" path="res://icon.svg" id="1_jotil"]
+[ext_resource type="Shape2D" uid="uid://c6d1a0jmre6w3" path="res://resources/linkgrab.tres" id="3_mawog"]
 [ext_resource type="Script" uid="uid://bo5e0k3mof3wd" path="res://JointLine.gd" id="4_asog6"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jotil"]
@@ -28,8 +29,17 @@ texture = SubResource("PlaceholderTexture2D_jotil")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_44gc5")
 
-[node name="BlobInput" type="Node2D" parent="."]
+[node name="BlobInput" type="Area2D" parent="."]
+position = Vector2(337, 292)
+collision_layer = 0
+collision_mask = 8
+input_pickable = false
+monitorable = false
 script = ExtResource("1_44gc5")
+blobCreate = ExtResource("1_612pj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlobInput"]
+shape = ExtResource("3_mawog")
 
 [node name="Structure" type="Node2D" parent="."]
 
