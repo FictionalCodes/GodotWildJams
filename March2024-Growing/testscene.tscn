@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://djaex1bqq41kf"]
+
+[ext_resource type="Script" uid="uid://br50dk8gxrvjm" path="res://scripts/BlobInputController.gd" id="1_44gc5"]
+[ext_resource type="PackedScene" uid="uid://lxq5o1pnblcb" path="res://prefabs/FreeBlob.tscn" id="1_612pj"]
+[ext_resource type="Texture2D" uid="uid://be07qiiv45u73" path="res://icon.svg" id="1_jotil"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jotil"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44gc5"]
+size = Vector2(1280, 53)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jotil"]
+radius = 17.0294
+
+[node name="Node2D" type="Node2D"]
+
+[node name="FreeBlob" parent="." instance=ExtResource("1_612pj")]
+position = Vector2(709, 304)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(636, 687)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(1281, 54)
+texture = SubResource("PlaceholderTexture2D_jotil")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_44gc5")
+
+[node name="BlobInput" type="Node2D" parent="."]
+script = ExtResource("1_44gc5")
+
+[node name="Structure" type="Node2D" parent="."]
+
+[node name="PlacedBlobTest_2" type="RigidBody2D" parent="Structure"]
+position = Vector2(332, 573)
+collision_layer = 8
+collision_mask = 13
+
+[node name="Sprite2D" type="Sprite2D" parent="Structure/PlacedBlobTest_2"]
+scale = Vector2(0.28125, 0.28125)
+texture = ExtResource("1_jotil")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structure/PlacedBlobTest_2"]
+shape = SubResource("CircleShape2D_jotil")
+
+[node name="PlacedBlobTest" type="RigidBody2D" parent="Structure"]
+position = Vector2(333, 372)
+collision_layer = 8
+collision_mask = 13
+
+[node name="Sprite2D" type="Sprite2D" parent="Structure/PlacedBlobTest"]
+scale = Vector2(0.28125, 0.28125)
+texture = ExtResource("1_jotil")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structure/PlacedBlobTest"]
+shape = SubResource("CircleShape2D_jotil")
+
+[editable path="FreeBlob"]

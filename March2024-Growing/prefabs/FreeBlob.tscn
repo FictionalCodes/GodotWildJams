@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://lxq5o1pnblcb"]
+
+[ext_resource type="Script" uid="uid://cixkp84753st6" path="res://scripts/BlobBody.gd" id="1_qspw7"]
+[ext_resource type="Texture2D" uid="uid://be07qiiv45u73" path="res://icon.svg" id="2_kx786"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_612pj"]
+bounce = 0.2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jotil"]
+radius = 17.0294
+
+[node name="FreeBlob" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 5
+input_pickable = true
+physics_material_override = SubResource("PhysicsMaterial_612pj")
+freeze_mode = 1
+linear_damp = 1.0
+script = ExtResource("1_qspw7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.28125, 0.28125)
+texture = ExtResource("2_kx786")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jotil")
