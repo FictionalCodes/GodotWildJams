@@ -19,6 +19,7 @@ radius = 17.0294
 
 [node name="FreeBlob" parent="." instance=ExtResource("1_612pj")]
 position = Vector2(709, 304)
+initialState = null
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(636, 687)
@@ -30,17 +31,18 @@ texture = SubResource("PlaceholderTexture2D_jotil")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_44gc5")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="MousePointer" type="Node2D" parent="."]
 script = ExtResource("1_44gc5")
+blobCreate = ExtResource("1_612pj")
 
-[node name="BlobSelector" type="Area2D" parent="Node2D"]
+[node name="BlobSelector" type="Area2D" parent="MousePointer"]
 process_mode = 4
 collision_layer = 0
 collision_mask = 8
 input_pickable = false
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/BlobSelector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MousePointer/BlobSelector"]
 shape = ExtResource("3_mawog")
 
 [node name="Structure" type="Node2D" parent="."]
@@ -51,6 +53,7 @@ collision_layer = 8
 collision_mask = 13
 lock_rotation = true
 script = ExtResource("4_b56k5")
+initialState = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Structure/PlacedBlobTest"]
 scale = Vector2(0.28125, 0.28125)
@@ -81,6 +84,7 @@ collision_layer = 8
 collision_mask = 13
 lock_rotation = true
 script = ExtResource("4_b56k5")
+initialState = 3
 
 [node name="Spring1_2" type="DampedSpringJoint2D" parent="Structure/PlacedBlobTest_2"]
 position = Vector2(1, 0)
@@ -112,6 +116,7 @@ collision_layer = 8
 collision_mask = 13
 lock_rotation = true
 script = ExtResource("4_b56k5")
+initialState = 3
 
 [node name="Spring1_2" type="DampedSpringJoint2D" parent="Structure/PlacedBlobTest_3"]
 rotation = 1.92859
@@ -136,7 +141,7 @@ texture = ExtResource("1_jotil")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Structure/PlacedBlobTest_3"]
 shape = SubResource("CircleShape2D_jotil")
 
-[connection signal="body_entered" from="Node2D/BlobSelector" to="Node2D" method="on_body_entered"]
-[connection signal="body_exited" from="Node2D/BlobSelector" to="Node2D" method="on_body_exited"]
+[connection signal="body_entered" from="MousePointer/BlobSelector" to="MousePointer" method="on_body_entered"]
+[connection signal="body_exited" from="MousePointer/BlobSelector" to="MousePointer" method="on_body_exited"]
 
 [editable path="FreeBlob"]

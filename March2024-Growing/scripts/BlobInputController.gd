@@ -32,8 +32,9 @@ func pickupBlob(selected: BlobBody) -> void:
 
 
 func placeBlob() -> void:
-	pickedUp.drop()
+	pickedUp.drop(hoveringBlobs)
 	pickedUp = null
+
 	selectionArea.process_mode = Node.PROCESS_MODE_DISABLED
 	hoveringBlobs.clear()
 
@@ -57,7 +58,7 @@ func doPointQuery(mousePos: Vector2) -> CollisionObject2D:
 func on_body_entered(body: Node2D) -> void:
 	print("Mouse Area Entered")
 
-	if body is BlobBody:
+	if body is BlobBody and body.CanBeAttachedTo():
 		print("Structure Blob Found")
 		hoveringBlobs.append(body as BlobBody)
 		queue_redraw()
@@ -77,6 +78,4 @@ func _physics_process(_delta: float) -> void:
 
 func _draw() -> void:
 	if pickedUp != null:
-		for blob in hoveringBlobs:
-			#print(pickedUp.global_position, blob.global_position)
-			draw_line(to_local(pickedUp.global_position), to_local(blob.global_position), Color.RED)
+		pickedUp.ConnectorPreview(hoveringBlobs)
