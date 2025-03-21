@@ -79,3 +79,4 @@ func _physics_process(_delta: float) -> void:
 func _draw() -> void:
 	if pickedUp != null:
 		pickedUp.ConnectorPreview(hoveringBlobs)
+		

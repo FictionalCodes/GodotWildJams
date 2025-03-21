@@ -41,7 +41,10 @@ func FindClosest(a: BlobBody, b: BlobBody) -> bool:
 	return distanceA < distanceB
 	
 func CheckCast(item: BlobBody) -> bool:
-	pass
+	var query = PhysicsRayQueryParameters2D.create(global_position, item.global_position, Constants.STRUCTURE_BLOB_LAYER_INDEX, [item])
+	var worldState = get_world_2d().direct_space_state
+	var results = worldState.intersect_ray(query)
+	return results.is_empty()
 	
 func DistanceCheck(item: BlobBody) -> bool:
-	pass
+	return true
