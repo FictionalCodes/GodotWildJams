@@ -2,9 +2,10 @@ class_name Player extends Area2D
 
 @onready var animationTree: PlayerAnimator = $AnimationTree
 @onready var stateMachine: PlayerStateMachine = $PlayerStateMachine
-
+@export var speedFactor: float = 3.0
 @export var grassLayer: TileMapLayer
 
+signal player_cell_reached(position : Vector2)
 
 var _currentMoveDir := Vector2i.ZERO
 var _inputDir := Vector2i.ZERO
@@ -28,15 +29,23 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var _inputDir = Vector2i(Input.get_vector(&"left", &"right", &"up", &"down").sign())
-	
+	var inputTemp = Input.get_vector(&"left", &"right", &"up", &"down")
+	if inputTemp != Vector2.ZERO:
+		if inputTemp.abs().max_axis_index() == Vector2.Axis.AXIS_X:
+			inputTemp.y = 0.0
+		else:
+			inputTemp.x = 0.0
+		_inputDir = inputTemp.sign()
+		
 	if _currentMoveDir != Vector2i.ZERO:
-		cellMoveProgress += delta
+		cellMoveProgress += delta * speedFactor
 		if cellMoveProgress > 1.0:
-			_currentMoveDir = Vector2i.ZERO
+			player_cell_reached.emit(position)
+			set_next_target(_inputDir)
+
 		position = _previousGlobalPos.lerp(_nextGlobalPos, cellMoveProgress)
 		
-	if _inputDir != Vector2i.ZERO and _currentMoveDir == Vector2i.ZERO:
+	if _currentMoveDir == Vector2i.ZERO:
 		set_next_target(_inputDir)
 
 				
