@@ -1,0 +1,213 @@
+[gd_scene load_steps=18 format=4 uid="uid://otmnij7gnitr"]
+
+[ext_resource type="Script" path="res://scripts/LevelArea.gd" id="1_b56k5"]
+[ext_resource type="TileSet" uid="uid://bkhb54h7d252c" path="res://CreatedResources/maintileset.tres" id="1_jotil"]
+[ext_resource type="SpriteFrames" uid="uid://kq3kvhg8s58j" path="res://CreatedResources/playeranimation/playerframes.tres" id="2_44gc5"]
+[ext_resource type="Script" uid="uid://duvihv45gyvbj" path="res://scripts/Player/Player.gd" id="2_612pj"]
+[ext_resource type="Script" uid="uid://ca0j2kw3kcc8" path="res://scripts/Level/GrassEatingLayer.gd" id="3_scc5w"]
+[ext_resource type="AnimationNodeBlendSpace2D" uid="uid://cm22j7vlpmiaa" path="res://CreatedResources/playeranimation/running_tree.tres" id="4_asog6"]
+[ext_resource type="Script" uid="uid://e0tc0oydxx0m" path="res://scripts/Player/PlayerAnimator.gd" id="5_mawog"]
+[ext_resource type="Script" uid="uid://d1kf0audnhacd" path="res://scripts/Player/PlayerStateMachine.gd" id="8_fy0p5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44gc5"]
+size = Vector2(28, 28)
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_asog6"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mawog"]
+states/PlayerRun/node = ExtResource("4_asog6")
+states/PlayerRun/position = Vector2(627, 100)
+transitions = ["Start", "PlayerRun", SubResource("AnimationNodeStateMachineTransition_asog6")]
+
+[sub_resource type="Animation" id="Animation_asog6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"run"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprites:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_scc5w"]
+resource_name = "player_run_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"run"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprites:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_b56k5"]
+resource_name = "player_run_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"run"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprites:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_mawog"]
+resource_name = "player_run_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"run"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprites:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_612pj"]
+resource_name = "player_run_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"run"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b56k5"]
+_data = {
+&"RESET": SubResource("Animation_asog6"),
+&"player_run_down": SubResource("Animation_scc5w"),
+&"player_run_left": SubResource("Animation_b56k5"),
+&"player_run_right": SubResource("Animation_mawog"),
+&"player_run_up": SubResource("Animation_612pj")
+}
+
+[node name="PlayArea" type="Node2D" node_paths=PackedStringArray("grassLayer")]
+script = ExtResource("1_b56k5")
+grassLayer = NodePath("GrassLayer")
+
+[node name="GrassLayer" type="TileMapLayer" parent="."]
+visibility_layer = 16
+tile_map_data = PackedByteArray("AAACAAIAAQAAAAAAAQACAAMAAQAAAAAAAQACAAQAAQAAAAAAAQACAAUAAQAAAAAAAQADAAIAAQAAAAAAAQADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAQAAAAAAAQACAAYAAQAAAAAAAQADAAYAAQAAAAAAAQAEAAYAAQAAAAAAAQAFAAYAAQAAAAAAAQAGAAYAAQAAAAAAAQAHAAYAAQAAAAAAAQAIAAYAAQAAAAAAAQAJAAYAAQAAAAAAAQAKAAYAAQAAAAAAAQAEAAIAAQAAAAAAAQAFAAIAAQAAAAAAAQAGAAIAAQAAAAAAAQAHAAIAAQAAAAAAAQAIAAIAAQAAAAAAAQAJAAIAAQAAAAAAAQAKAAIAAQAAAAAAAQAKAAMAAQAAAAAAAQAKAAQAAQAAAAAAAQAKAAUAAQAAAAAAAQAEAAMAAAAGAAAAAgAFAAMAAAAFAAAAAQAGAAMAAAAGAAEAAgAHAAMAAAAFAAAAAQAIAAMAAAAGAAEAAQAJAAMAAQAAAAAAAQAEAAQAAAAGAAAAAAAFAAQAAAAFAAAAAAAGAAQAAAAEAAAAAAAHAAQAAAAFAAAAAAAIAAQAAAAGAAAAAwAJAAQAAQAAAAAAAQAEAAUAAQAAAAAAAQAFAAUAAQAAAAAAAQAGAAUAAQAAAAAAAQAHAAUAAQAAAAAAAQAIAAUAAQAAAAAAAQAJAAUAAQAAAAAAAQA=")
+tile_set = ExtResource("1_jotil")
+occlusion_enabled = false
+navigation_enabled = false
+script = ExtResource("3_scc5w")
+
+[node name="EatingLayer" type="TileMapLayer" parent="GrassLayer"]
+tile_map_data = PackedByteArray("AAAEAAQAAAADAAIAAAAHAAMAAAADAAIAAAAFAAMAAAADAAIAAAAHAAQAAAADAAIAAAAIAAQAAAADAAIAAAAIAAMAAAADAAIAAAAGAAMAAAADAAIAAAAGAAQAAAAEAAIAAAAFAAQAAAAEAAIAAAAEAAMAAAAEAAIAAAA=")
+tile_set = ExtResource("1_jotil")
+
+[node name="GroundLayer" type="TileMapLayer" parent="GrassLayer"]
+tile_map_data = PackedByteArray("AAACAAEAAAAIAAAAAAADAAEAAAAIAAAAAAAEAAEAAAAIAAAAAAAFAAEAAAAIAAAAAAAGAAEAAAAIAAAAAAAHAAEAAAAIAAAAAAAIAAEAAAAIAAAAAAAJAAEAAAAIAAAAAAAKAAEAAAAIAAAAAAALAAEAAAAIAAEAAAALAAIAAAAIAAEAAAALAAMAAAAIAAEAAAALAAQAAAAIAAEAAAALAAUAAAAIAAEAAAAKAAYAAAAIAAAAAAAJAAYAAAAIAAAAAAAIAAYAAAAIAAAAAAAHAAYAAAAIAAAAAAAGAAYAAAAIAAAAAAALAAYAAAAIAAAAAAAFAAYAAAAIAAAAAAAEAAYAAAAIAAAAAAADAAYAAAAIAAAAAAACAAYAAAAIAAAAAAABAAYAAAAIAAEAAgABAAUAAAAIAAEAAgABAAQAAAAIAAEAAgABAAMAAAAIAAEAAgABAAIAAAAIAAEAAgABAAEAAAAIAAEAAgA=")
+tile_set = ExtResource("1_jotil")
+
+[node name="Player" type="Area2D" parent="GrassLayer" node_paths=PackedStringArray("grassLayer")]
+position = Vector2(80, 77)
+script = ExtResource("2_612pj")
+grassLayer = NodePath("..")
+
+[node name="PlayerSprites" type="AnimatedSprite2D" parent="GrassLayer/Player"]
+position = Vector2(1, -3)
+sprite_frames = ExtResource("2_44gc5")
+animation = &"run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrassLayer/Player"]
+shape = SubResource("RectangleShape2D_44gc5")
+
+[node name="AnimationTree" type="AnimationTree" parent="GrassLayer/Player"]
+tree_root = SubResource("AnimationNodeStateMachine_mawog")
+anim_player = NodePath("../AnimationPlayer")
+parameters/PlayerRun/blend_position = Vector2(0.025461, 0.417367)
+script = ExtResource("5_mawog")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GrassLayer/Player"]
+libraries = {
+&"": SubResource("AnimationLibrary_b56k5")
+}
+
+[node name="Camera2D" type="Camera2D" parent="GrassLayer/Player"]
+limit_smoothed = true
+position_smoothing_enabled = true
+
+[node name="CollisionCast" type="RayCast2D" parent="GrassLayer/Player"]
+target_position = Vector2(0, 32)
+collision_mask = 18
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="PlayerStateMachine" type="Node" parent="GrassLayer/Player"]
+script = ExtResource("8_fy0p5")
+metadata/_custom_type_script = "uid://d1kf0audnhacd"
+
+[connection signal="player_cell_reached" from="GrassLayer/Player" to="GrassLayer" method="_on_player_player_cell_reached"]

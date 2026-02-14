@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl36mv26w5j13"]
+
+[ext_resource type="Script" uid="uid://cnuoni1ax5l0i" path="res://scripts/Level/EdibleTile.gd" id="1_j2veq"]
+
+[node name="EdibleTile" type="Sprite2D"]
+script = ExtResource("1_j2veq")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+explosiveness = 1.0
+randomness = 0.4
+
+[connection signal="finished" from="CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]

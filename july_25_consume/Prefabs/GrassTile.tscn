@@ -1,0 +1,16 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2jgcqp8vjyp7"]
+
+[ext_resource type="PackedScene" uid="uid://cl36mv26w5j13" path="res://Prefabs/EdibleTileBase.tscn" id="1_qx4b8"]
+[ext_resource type="Texture2D" uid="uid://ch1xbu3jwa705" path="res://CreatedResources/edibles/grass1.tres" id="2_f7rjj"]
+[ext_resource type="Texture2D" uid="uid://b8xigoug2i6l" path="res://CreatedResources/edibles/grass2.tres" id="3_kr7ny"]
+[ext_resource type="Texture2D" uid="uid://54c0dbo3yrjg" path="res://CreatedResources/edibles/grass3.tres" id="4_7fwfx"]
+[ext_resource type="Texture2D" uid="uid://b1rq5fl5tee7x" path="res://CreatedResources/edibles/grass-eaten1.tres" id="5_7amct"]
+[ext_resource type="Texture2D" uid="uid://clhformpaqv48" path="res://CreatedResources/edibles/grass-eaten2.tres" id="6_i68p2"]
+
+[node name="EdibleTile" instance=ExtResource("1_qx4b8")]
+visibility_layer = 16
+z_index = -1
+y_sort_enabled = true
+texture = ExtResource("2_f7rjj")
+possibleTextures = Array[Texture2D]([ExtResource("2_f7rjj"), ExtResource("3_kr7ny"), ExtResource("4_7fwfx")])
+possibleEatenTextures = Array[Texture2D]([ExtResource("5_7amct"), ExtResource("6_i68p2")])

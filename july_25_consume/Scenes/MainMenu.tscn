@@ -1,0 +1,193 @@
+[gd_scene load_steps=5 format=3 uid="uid://cotlcv2johhre"]
+
+[ext_resource type="Script" uid="uid://cens3ymnxbagl" path="res://scripts/UI/MainMenu.gd" id="2_4vh8y"]
+[ext_resource type="Script" uid="uid://ba2p8t6lbjhw5" path="res://scripts/UI/SoundEffectsOptions.gd" id="2_58fj5"]
+
+[sub_resource type="Resource" id="Resource_853f1"]
+metadata/__load_path__ = "res://scenes/Chapters/Chapter_1.tscn"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_frhrr"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("clickAudioPlayer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_4vh8y")
+firstScene = SubResource("Resource_853f1")
+clickAudioPlayer = NodePath("AudioStreamPlayer_click")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(779, 1)
+color = Color(0.063982, 0.169532, 0.151278, 1)
+
+[node name="Pattern" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.552941)
+texture_repeat = 2
+material = SubResource("ShaderMaterial_frhrr")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -301.5
+offset_top = 32.0
+offset_right = 301.5
+offset_bottom = 225.0
+grow_horizontal = 2
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -28.5
+offset_right = 46.0
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start"
+
+[node name="OptionsPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.446875
+anchor_top = 0.802083
+anchor_right = 0.446875
+anchor_bottom = 0.802083
+offset_left = -541.0
+offset_top = -78.5
+offset_bottom = 78.5
+grow_horizontal = 0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="VBoxContainer" parent="OptionsPanel"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="GridContainer" type="GridContainer" parent="OptionsPanel/PanelContainer" node_paths=PackedStringArray("_masterSlider", "_musicSlider", "_effectsSlider")]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/v_separation = 8
+columns = 2
+script = ExtResource("2_58fj5")
+_masterSlider = NodePath("MasterVolumeSlider")
+_musicSlider = NodePath("MusicVolumeSlider")
+_effectsSlider = NodePath("EffectsVolumeSlider")
+
+[node name="MasterVolumeLabel" type="Label" parent="OptionsPanel/PanelContainer/GridContainer"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="OptionsPanel/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+step = 5.0
+
+[node name="MusicVolumeLabel" type="Label" parent="OptionsPanel/PanelContainer/GridContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="OptionsPanel/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+step = 5.0
+
+[node name="EffectsVolumeLabel" type="Label" parent="OptionsPanel/PanelContainer/GridContainer"]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="EffectsVolumeSlider" type="HSlider" parent="OptionsPanel/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+step = 5.0
+
+[node name="Controls Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.18906
+anchor_top = 0.796528
+anchor_right = 1.18906
+anchor_bottom = 0.796528
+offset_left = -541.0
+offset_top = -110.5
+offset_right = -315.0
+offset_bottom = 110.5
+grow_horizontal = 0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls Panel"]
+layout_mode = 2
+theme_override_constants/separation = 28
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Controls Panel/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Sprite2D" type="TextureRect" parent="Controls Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Controls Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "MOVE"
+
+[node name="VBoxContainer_2" type="VBoxContainer" parent="Controls Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Controls Panel/HBoxContainer/VBoxContainer_2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Sprite2D" type="TextureRect" parent="Controls Panel/HBoxContainer/VBoxContainer_2"]
+layout_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Controls Panel/HBoxContainer/VBoxContainer_2"]
+layout_mode = 2
+text = "JUMP"
+
+[node name="AudioStreamPlayer_music" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
+autoplay = true
+
+[node name="AudioStreamPlayer_click" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="StartButton" to="." method="StartGame"]
+[connection signal="tree_exiting" from="OptionsPanel/PanelContainer/GridContainer" to="OptionsPanel/PanelContainer/GridContainer" method="_on_tree_exiting"]
+[connection signal="value_changed" from="OptionsPanel/PanelContainer/GridContainer/MasterVolumeSlider" to="OptionsPanel/PanelContainer/GridContainer" method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="OptionsPanel/PanelContainer/GridContainer/MusicVolumeSlider" to="OptionsPanel/PanelContainer/GridContainer" method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="OptionsPanel/PanelContainer/GridContainer/EffectsVolumeSlider" to="OptionsPanel/PanelContainer/GridContainer" method="_on_effects_volume_slider_value_changed"]
