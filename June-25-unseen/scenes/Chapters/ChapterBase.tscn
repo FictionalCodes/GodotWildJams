@@ -10,6 +10,9 @@
 
 [node name="chapter_base" type="Node2D"]
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.399428, 0.399428, 0.399428, 1)
+
 [node name="CaveBackground" parent="." instance=ExtResource("1_fh17v")]
 
 [node name="base_tiles" type="TileMapLayer" parent="."]

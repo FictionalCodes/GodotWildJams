@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://chssdjvemcrmf"]
+[gd_scene load_steps=15 format=3 uid="uid://chssdjvemcrmf"]
 
 [ext_resource type="Script" uid="uid://b7nj5xg6v20yj" path="res://scripts/GoalButterfly.gd" id="1_muk30"]
 [ext_resource type="PackedScene" uid="uid://bvkwausfoac70" path="res://scenes/Chapters/Chapter_2.tscn" id="2_wg10d"]
@@ -7,6 +7,10 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ncdvl"]
 size = Vector2(64, 64)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wg10d"]
+blend_mode = 1
+light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_goy6t"]
 offsets = PackedFloat32Array(0, 0.0714286, 0.142857, 0.214286, 0.285714, 0.357143, 0.5, 0.642857, 0.928571)
@@ -23,10 +27,57 @@ particle_flag_disable_z = true
 angle_min = 1.07288e-05
 angle_max = 1.07288e-05
 spread = 180.0
-initial_velocity_min = 100.0
-initial_velocity_max = 200.0
+initial_velocity_min = 150.0
+initial_velocity_max = 300.0
 gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_10skh")
+
+[sub_resource type="Gradient" id="Gradient_wg10d"]
+offsets = PackedFloat32Array(0.256803, 0.705782)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lrbxv"]
+gradient = SubResource("Gradient_wg10d")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_bou8q"]
+resource_name = "light_pulse"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.03333, 2),
+"transitions": PackedFloat32Array(0.287175, 1.36604, 1),
+"update": 0,
+"values": [1.0, 4.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_15hnb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ht6p"]
+_data = {
+&"RESET": SubResource("Animation_15hnb"),
+&"light_pulse": SubResource("Animation_bou8q")
+}
 
 [node name="goal_butterfly" type="Area2D"]
 script = ExtResource("1_muk30")
@@ -42,12 +93,27 @@ frame = 12
 shape = SubResource("RectangleShape2D_ncdvl")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_wg10d")
 amount = 100
-lifetime = 1.5
+lifetime = 1.75
+trail_enabled = true
+trail_lifetime = 0.03
+trail_sections = 6
+trail_section_subdivisions = 2
 process_material = SubResource("ParticleProcessMaterial_1dtiw")
 
 [node name="LevelComplete_AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_wg10d")
 bus = &"SFX"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = SubResource("GradientTexture2D_lrbxv")
+texture_scale = 2.01535
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+libraries = {
+&"": SubResource("AnimationLibrary_0ht6p")
+}
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bov2yt4slyd0w"]
+[gd_scene load_steps=6 format=3 uid="uid://bov2yt4slyd0w"]
 
 [ext_resource type="Texture2D" uid="uid://cupy5c5gfjr2i" path="res://assets/sprites/objects.png" id="1_xh5ig"]
+[ext_resource type="Texture2D" uid="uid://iepetp5y270s" path="res://assets/sprites/objects_n.png" id="2_0hvxi"]
+[ext_resource type="Texture2D" uid="uid://b7084chgtsmo0" path="res://assets/sprites/objects_s.png" id="3_e21ag"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rovs1"]
 size = Vector2(60, 48)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_xh5ig"]
+diffuse_texture = ExtResource("1_xh5ig")
+normal_texture = ExtResource("2_0hvxi")
+specular_texture = ExtResource("3_e21ag")
 
 [node name="Spikes" type="Area2D"]
 
@@ -13,7 +20,7 @@ shape = SubResource("RectangleShape2D_rovs1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_xh5ig")
+texture = SubResource("CanvasTexture_xh5ig")
 hframes = 4
 vframes = 4
 frame = 10

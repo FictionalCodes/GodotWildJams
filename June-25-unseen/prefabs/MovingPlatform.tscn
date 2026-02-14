@@ -20,6 +20,7 @@ rotation = -0.00255101
 rotates = false
 loop = false
 script = ExtResource("1_818w5")
+speed = 250.0
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="PathFollow2D"]
 collision_layer = 2
